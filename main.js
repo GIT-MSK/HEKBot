@@ -1,6 +1,8 @@
 
 const { Client, Collection, Intents } = require("discord.js");
 
+import { token } from "./token";
+
 const fs = require('fs');
 
 // These should be added
@@ -63,9 +65,6 @@ client.on('messageCreate', message => {
 
 
 
-
-
-
 // Has to be the last line of the file
-client.login('OTAwMDUzNjk0MTEwOTIwNzc1.YW7uUg.FbB6s6fk5bAbNsPMZHJe05tFSbs');
+client.login(token);
 
