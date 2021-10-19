@@ -1,8 +1,6 @@
 
 const { Client, Collection, Intents } = require("discord.js");
 
-import { token } from "./token";
-
 const fs = require('fs');
 
 // These should be added
@@ -32,7 +30,7 @@ for (const file of commandFiles) {
     client.commands.set(command.name, command);
 }
 
-
+// Once the bot starts
 client.once('ready', () => {
     console.log('HEKBot is online bby!')
 });
@@ -40,14 +38,13 @@ client.once('ready', () => {
 
 client.on('messageCreate', message => {
 
-    console.log(message.content);
+    console.log(`${message.author.username}: ${message.content}`);
 
     // Command starts with the prefix, and the bot did not send the command
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
-
 
     switch (command) {
         case 'ping':
@@ -56,15 +53,20 @@ client.on('messageCreate', message => {
         case 'router-config':
             client.commands.get('router-config').execute(message, args);
             break;
+        case 'olav':
+            client.commands.get('olav').execute(message, args);
     }
-
-    // if (command === 'ping') {
-    //     client.commands.get('ping').execute(message, args)
-    // }
 });
 
 
+// Finds the token before initializing
+const token = fs.readFileSync('./token.txt', 'utf8', (err, data) => {
+
+    if (err) throw err;
+
+    return data;
+});
 
 // Has to be the last line of the file
-client.login(token);
+client.login(`${token}`);
 
