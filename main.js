@@ -35,8 +35,18 @@ client.once('ready', () => {
     console.log('HEKBot is online bby!')
 });
 
+// Reconnects
+client.once("reconnecting", () => {
+    console.log("Reconnecting!");
+});
 
-client.on('messageCreate', message => {
+// disconnects
+client.once("disconnect", () => {
+    console.log("Disconnect!");
+});
+
+
+client.on('messageCreate', async message => {
 
     console.log(`${message.author.username}: ${message.content}`);
 
@@ -46,6 +56,7 @@ client.on('messageCreate', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
+    // Command possibilities
     switch (command) {
         case 'ping':
             client.commands.get('ping').execute(message, args);
