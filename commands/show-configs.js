@@ -36,6 +36,6 @@ module.exports = {
 
         // Embed.addFields({ name: filenames })
 
-        message.channel.send({ embeds: [EmbedFiles] });
+        await message.channel.send({ embeds: [EmbedFiles] });
     }
 }
