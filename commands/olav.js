@@ -1,9 +1,9 @@
 module.exports = {
     name: 'olav',
     description: 'Olav',
-    execute(message, args) {
+    execute(client, message, args) {
 
-        message.channel.send(
+        message.channel.reply(
             "`Hasjverdi`"
         );
     }
