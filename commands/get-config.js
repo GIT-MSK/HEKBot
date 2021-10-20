@@ -1,3 +1,6 @@
+// Gets a spesific config and displays the file from the configs directory
+// Format: !hek get-config -configName
+
 module.exports = {
     name: 'get-config',
     description: 'Gets a spesific config',
@@ -23,7 +26,7 @@ module.exports = {
             // Dynamically finds the spesific file in the filenames array
             let file = filenames[filenames.indexOf(strFirstWord)];
 
-            if (file != undefined || file == '') {
+            if (file != undefined || file != '') {
                 await message.channel.send({
                     files: [{
                         attachment: `configs/${strFirstWord}`,

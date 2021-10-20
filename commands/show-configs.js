@@ -1,3 +1,6 @@
+// Command to show all of the configs in an embed
+// Need to do this another way some other time
+
 module.exports = {
     name: 'show-config',
     description: 'Shows the configs in a list',

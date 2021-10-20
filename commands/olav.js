@@ -1,3 +1,5 @@
+// yes
+
 module.exports = {
     name: 'olav',
     description: 'Olav',
