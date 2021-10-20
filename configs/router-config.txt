@@ -1,0 +1,4 @@
+enable conf t
+line console 0
+password cisco
+login exit

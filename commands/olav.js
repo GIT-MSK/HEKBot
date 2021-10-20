@@ -1,10 +1,10 @@
 module.exports = {
     name: 'olav',
     description: 'Olav',
-    execute(client, message, args) {
+    async execute(client, message, args) {
 
-        message.channel.reply(
+        await message.channel.send(
             "`Hasjverdi`"
-        );
+        ).catch(console.error)
     }
 }
