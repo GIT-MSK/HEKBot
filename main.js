@@ -1,6 +1,5 @@
 
 const { Client, Collection, Intents } = require("discord.js");
-const fs = require('fs');
 
 require('dotenv').config();
 
@@ -28,8 +27,7 @@ client.events = new Collection();
 
 ['command_handler', 'event_handler'].forEach(handler => {
     require(`./handlers/${handler}`)(client, Client)
-})
-
+});
 
 // Finds the token before initializing
 // const token = fs.readFileSync('./token.txt', 'utf8', (err, data) => {
@@ -38,7 +36,6 @@ client.events = new Collection();
 
 //     return data;
 // });
-
 
 // Has to be the last line of the file
 client.login(`${process.env.TOKEN}`);

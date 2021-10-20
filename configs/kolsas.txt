@@ -1,0 +1,6 @@
+enable
+conf t
+interface gig 0/1
+switchport mode access
+switchport access vlan 1
+end
