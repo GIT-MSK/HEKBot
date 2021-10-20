@@ -13,6 +13,7 @@ module.exports = {
         let filenames = await fs.readdirSync(directory_name);
 
         // Converts the array into a printable string
+        // There's probably a cleaner solution to this
         let filenamesString = filenames.toString().replaceAll(",", "\n");
 
         console.log("\nFilenames in directory:");
