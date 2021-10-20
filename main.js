@@ -7,6 +7,7 @@ require('dotenv').config();
 const myIntents = new Intents();
 
 // Adding permisisons to the bot as of discord.js v13
+// NB! This is overkill, but added for testing purposes
 myIntents.add(
     Intents.FLAGS.GUILDS,
     Intents.FLAGS.GUILD_MEMBERS,
