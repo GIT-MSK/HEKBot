@@ -2,8 +2,8 @@
 // Format: !hek get-config -configName.txt
 
 module.exports = {
-    name: 'get-config',
-    description: 'Gets a spesific config\nFormat: !hek get-config -configName.txt',
+    name: 'delete-config',
+    description: 'Deletes a spesific config\nFormat: !hek delete-config -configName.txt',
     async execute(client, message, args) {
 
         // Import the filesystem module
@@ -15,30 +15,30 @@ module.exports = {
         let filenames = await fs.readdirSync(directory_name);
 
         // Finds the content of the command
-        let newMessage = message.content.replace('!hek get-config ', '');
+        let newMessage = message.content.replace('!hek delete-config ', '');
 
         if (newMessage.startsWith('-')) {
             let strFirstWord = newMessage.split(' ')[0].replace('-', '');
 
             console.log("\nFilenames in directory:");
             console.log(filenames);
+            console.log(strFirstWord)
 
             // Dynamically finds the spesific file in the filenames array
             let file = filenames[filenames.indexOf(strFirstWord)];
 
-            if (file != undefined || file != '') {
-                await message.channel.send({
-                    files: [{
-                        attachment: `configs/${strFirstWord}`,
-                        name: `${strFirstWord}`
-                    }]
-                }).catch(console.error);
-                console.log(file);
+            if (typeof file !== 'undefined' && file !== '') {
+                try {
+                    fs.rmSync(`configs/${file}`);
+                    message.channel.send(`Deleted ${file} from the database!`);
+                } catch (e) {
+                    console.error(e, 'from catch rmSync')
+                }
             } else {
                 await message.reply(`Could not find config; ${strFirstWord} in the database`);
             }
         } else {
-            await message.reply('You need to use the format: !hek get-config -config-name');
+            await message.reply('You need to use the format: !hek delete-config -config-name');
         }
     }
 }

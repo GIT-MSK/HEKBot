@@ -3,7 +3,7 @@
 
 module.exports = {
     name: 'new-config',
-    description: "Writes a new config to the config folder",
+    description: "Writes a new config to the config folder\nFormat: !hek new-config -filename configtext",
     async execute(client, message, args) {
 
         // https://discord.js.org/#/docs/main/stable/class/MessageAttachment

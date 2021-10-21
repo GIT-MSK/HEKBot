@@ -1,0 +1,2 @@
+configure replace flash:labconfig
+confirm this by typing "y"
