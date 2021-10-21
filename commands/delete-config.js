@@ -20,15 +20,12 @@ module.exports = {
         if (newMessage.startsWith('-')) {
             let strFirstWord = newMessage.split(' ')[0].replace('-', '');
 
-            console.log("\nFilenames in directory:");
-            console.log(filenames);
-            console.log(strFirstWord)
-
             // Dynamically finds the spesific file in the filenames array
             let file = filenames[filenames.indexOf(strFirstWord)];
 
             if (typeof file !== 'undefined' && file !== '') {
                 try {
+                    //removes spesific file from the configs folder.
                     fs.rmSync(`configs/${file}`);
                     message.channel.send(`Deleted ${file} from the database!`);
                 } catch (e) {
