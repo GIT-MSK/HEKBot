@@ -26,7 +26,7 @@ module.exports = {
             // Dynamically finds the spesific file in the filenames array
             let file = filenames[filenames.indexOf(strFirstWord)];
 
-            if (file != undefined || file != '') {
+            if (typeof file !== 'undefined' && file !== '') {
                 await message.channel.send({
                     files: [{
                         attachment: `configs/${strFirstWord}`,
@@ -35,7 +35,7 @@ module.exports = {
                 }).catch(console.error);
                 console.log(file);
             } else {
-                await message.reply(`Could not find config; ${strFirstWord} in the database`);
+                await message.reply(`Could not find config; ${strFirstWord} in the database\nTry the show-configs command`);
             }
         } else {
             await message.reply('You need to use the format: !hek get-config -config-name');

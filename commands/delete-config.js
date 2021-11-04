@@ -1,4 +1,4 @@
-// Gets a spesific config and displays the file from the configs directory
+// Gets a spesific config and deletes the file from the configs directory
 // Format: !hek get-config -configName.txt
 
 module.exports = {

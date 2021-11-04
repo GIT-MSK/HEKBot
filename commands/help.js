@@ -15,7 +15,7 @@ module.exports = {
         const EmbedFiles = new MessageEmbed()
             .setColor('#0099ff')
             .setTitle('Help!')
-            .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley')
+            .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
             .setAuthor('Marius Karlsen')
             .setThumbnail('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fbitcoin%2Fbitcoin_PNG48.png&f=1&nofb=1')
             .setTimestamp()

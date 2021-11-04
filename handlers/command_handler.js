@@ -12,8 +12,5 @@ module.exports = (client, Client) => {
         } else {
             continue;
         }
-
-
     };
-
 }

@@ -10,7 +10,7 @@ module.exports = {
         const EmbedOlav = new MessageEmbed()
             .setColor('#85AB03')
             .setTitle('Olav')
-            .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley')
+            .setURL('https://www.youtube.com/watch?v=dQw4w9WgXcQ')
             .setDescription('Hasjverdi')
             .setThumbnail('attachment://OlavDenHellige.png')
             .setTimestamp()
