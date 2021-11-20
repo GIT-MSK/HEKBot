@@ -1,8 +1,8 @@
 // Ping command to check that the bot is responding
 
 module.exports = {
-  name: "play",
-  description: "This is a play command",
+  name: "borgir",
+  description: "This is a ping command",
 
   async execute(client, message, args) {
     const {
@@ -37,7 +37,7 @@ module.exports = {
       const player = createAudioPlayer();
 
       const resrouce = createAudioResource(
-        "/home/msk/Documents/HekBot/HEKBot/sounds/okay-lets-go.mp3",
+        "/home/msk/Documents/HekBot/HEKBot/sounds/burgir.mp3",
         {
           metadata: {
             title: "A test song",
