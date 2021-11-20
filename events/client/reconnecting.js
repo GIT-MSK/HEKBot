@@ -1,7 +1,4 @@
-
 // if the bot reconnects
 module.exports = () => {
-
-    console.log('HEKBot is reconnecting!');
-
-}
+  console.log("HEKBot is reconnecting!");
+};
