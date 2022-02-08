@@ -8,7 +8,7 @@ module.exports = {
     // ping -i 1 -c 4 192.168.0.105
 
     setInterval(() => {
-      const balancer = spawn("ping", ["-c 1", "192.168.131.141"]);
+      const balancer = spawn("ping", ["-c 1", "192.168.131.142"]);
       const www1 = spawn("ping", ["-c 1", "192.168.131.123"]);
       const www2 = spawn("ping", ["-c 1", "192.168.132.34"]);
       const docserv = spawn("ping", ["-c 1", "192.168.130.3"]);
@@ -20,7 +20,7 @@ module.exports = {
 
       // const names = ["docserv", "db"];
 
-      const names = ["balancer", "WWW1", "WWW2", "docserv", "db"];
+      const names = ["Balancer", "WWW1", "WWW2", "Docker", "DB"];
 
       let scriptOutput = "";
 

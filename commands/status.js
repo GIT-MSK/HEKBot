@@ -5,8 +5,6 @@ module.exports = {
     const { spawn } = require("child_process");
     const { MessageEmbed } = require("discord.js");
 
-    // ping -i 1 -c 4 192.168.0.105
-
     const balancer = spawn("ping", ["-c 1", "192.168.131.142"]);
     const www1 = spawn("ping", ["-c 1", "192.168.131.123"]);
     const www2 = spawn("ping", ["-c 1", "192.168.132.34"]);
@@ -16,20 +14,18 @@ module.exports = {
     const servers = [balancer, www1, www2, docserv, db];
 
     const EmbedFiles = new MessageEmbed()
-      .setColor("#0099ff")
+      .setColor("#b98f01")
       .setTitle("Status!")
-      .setThumbnail(
-        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpngimg.com%2Fuploads%2Fbitcoin%2Fbitcoin_PNG48.png&f=1&nofb=1"
-      )
+      .setThumbnail("attachment://dipcoin.png")
       .setTimestamp();
 
     // const servers = [docserv, db];
 
     // const names = ["docserv", "db"];
 
-    const names = ["balancer", "WWW1", "WWW2", "docserv", "db"];
+    const names = ["Balancer", "WWW1", "WWW2", "Docker", "DB"];
 
-    let scriptOutput = "";
+    let field = "";
 
     const serverCounter = servers.length;
 
@@ -54,23 +50,34 @@ module.exports = {
 
         console.log(`child process exited with code ${code}`);
 
-        console.log(count, "count");
-        console.log(serverCounter, "ServerCounter");
+        // code = exit code
 
         if (code == 1) {
-          EmbedFiles.addField(
-            `${names[servers.indexOf(server)].toString()} 📉 `,
-            "DOWN!"
-          );
+          field += `${names[servers.indexOf(server)].toString()}  📉 \n`;
+
+          // EmbedFiles.addField(
+          //   `${names[servers.indexOf(server)].toString()} 📉 `,
+          //   "DOWN!"
+          // );
         } else {
-          EmbedFiles.addField(
-            `${names[servers.indexOf(server)].toString()} ✅ `,
-            "UP!"
-          );
+          field += `${names[servers.indexOf(server)].toString()}  ✅ \n`;
+          // EmbedFiles.addField(
+          //   `${names[servers.indexOf(server)].toString()} ✅ `,
+          //   "UP!"
+          // );
         }
 
         if (count == serverCounter) {
-          await message.channel.send({ embeds: [EmbedFiles] });
+          EmbedFiles.addField("Servers", `${field} `);
+          await message.channel.send({
+            embeds: [EmbedFiles],
+            files: [
+              {
+                attachment: "img/dipcoin.png",
+                name: "dipcoin.png",
+              },
+            ],
+          });
         }
 
         // if (scriptOutput.includes("0 received")) {
