@@ -9,19 +9,18 @@ module.exports = {
 
     // Keeping track if the floating ip is set to the balancer or not.
     let ipBalancer = true;
+    let ipDatabase = true;
 
     setInterval(() => {
-      const balancer = spawn("ping", ["-c 1", "192.168.131.142"]);
-      const www1 = spawn("ping", ["-c 1", "192.168.131.123"]);
-      const www2 = spawn("ping", ["-c 1", "192.168.132.34"]);
-      const docserv = spawn("ping", ["-c 1", "192.168.130.3"]);
-      const db = spawn("ping", ["-c 1", "192.168.128.166"]);
-      const test = spawn("ping", ["-c 1", "192.168.128.44"]);
+      const balancer = spawn("ping", ["-c 2", "192.168.131.142"]);
+      const www1 = spawn("ping", ["-c 2", "192.168.131.123"]);
+      const www2 = spawn("ping", ["-c 2", "192.168.132.34"]);
+      const docserv = spawn("ping", ["-c 2", "192.168.130.3"]);
+      const db = spawn("ping", ["-c 2", "192.168.128.166"]);
+      const test = spawn("ping", ["-c 2", "192.168.128.44"]);
 
       const servers = [balancer, www1, www2, docserv, db, test];
       const names = ["Balancer", "WWW1", "WWW2", "Docker", "DB", "Test"];
-
-      let scriptOutput = "";
 
       // Looping through the servers and checking status
       for (const server of servers) {
@@ -44,16 +43,23 @@ module.exports = {
 
           // if error
           if (code != 0) {
-            // if the balancer is down, try to switch to the emergency temp server
+            // if the balancer or database is down, try to switch to the emergency temp server
             if (
-              names[servers.indexOf(server)].toString() == "Balancer" &&
-              ipBalancer == true
+              (names[servers.indexOf(server)].toString() == "Balancer" ||
+                names[servers.indexOf(server)].toString() == "DB") &&
+              ipBalancer == true &&
+              ipDatabase == true
             ) {
               try {
-                await message.channel.send("Trying to switch test...");
+                await message.channel.send("Trying to switch to test...");
                 await spawn("downtime");
                 await message.channel.send("Switched to test!");
-                ipBalancer = false;
+
+                if (names[servers.indexOf(server)].toString() == "Balancer") {
+                  ipBalancer = false;
+                } else if (names[servers.indexOf(server)].toString() == "DB") {
+                  ipDatabase = false;
+                }
               } catch (e) {
                 await message.channel.send(e);
               }
@@ -62,6 +68,7 @@ module.exports = {
             await message.reply(
               `${names[servers.indexOf(server)].toString()} is DOWN!!  📉 `
             );
+            // Balancer had been down, and is now up
           } else if (
             ipBalancer == false &&
             names[servers.indexOf(server)].toString() == "Balancer"
@@ -76,10 +83,25 @@ module.exports = {
             } catch (e) {
               await message.channel.send(e);
             }
+            // DB had been down, and is now up
+          } else if (
+            ipDatabase == false &&
+            names[servers.indexOf(server)].toString() == "DB"
+          ) {
+            try {
+              await message.channel.send(
+                "DB: Trying to switch back to Balancer..."
+              );
+              await spawn("downtimeFix");
+              ipDatabase = true;
+              await message.channel.send("Switched back to balancer!");
+            } catch (e) {
+              await message.channel.send(e);
+            }
           }
         });
       }
-    }, 1800000);
+    }, 1200000);
 
     await message.reply("Started listening!");
   },
