@@ -11,8 +11,9 @@ module.exports = {
     const docserv = spawn("ping", ["-c 1", "192.168.130.3"]);
     const db = spawn("ping", ["-c 1", "192.168.128.166"]);
     const test = spawn("ping", ["-c 1", "192.168.128.44"]);
+    const backup = spawn("ping", ["-c 1", "192.168.130.205"])		
 
-    const servers = [balancer, www1, www2, docserv, db, test];
+    const servers = [balancer, www1, www2, docserv, db, test, backup];
 
     const EmbedFiles = new MessageEmbed()
       .setColor("#b98f01")
@@ -24,7 +25,7 @@ module.exports = {
 
     // const names = ["docserv", "db"];
 
-    const names = ["Balancer", "WWW1", "WWW2", "Docker", "DB", "Test"];
+    const names = ["Balancer", "WWW1", "WWW2", "Docker", "DB", "Test", "Backup"];
 
     let field = "";
 

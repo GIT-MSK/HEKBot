@@ -14,9 +14,11 @@ module.exports = {
       const docserv = spawn("ping", ["-c 2", "192.168.130.3"]);
       const db = spawn("ping", ["-c 2", "192.168.128.166"]);
       const test = spawn("ping", ["-c 2", "192.168.128.44"]);
+      const backup = spawn("ping", ["-c 2", "192.168.130.205"])
 
-      const servers = [balancer, www1, www2, docserv, db, test];
-      const names = ["balancer", "www1", "www2", "dockServer", "db1", "test"];
+
+      const servers = [balancer, www1, www2, docserv, db, test, backup];
+      const names = ["balancer", "www1", "www2", "docServ", "db1", "test", "backup"];
 
       // Looping through the servers and checking status
       for (const server of servers) {
@@ -40,7 +42,7 @@ module.exports = {
           // if error
           if (code != 0) {
               try {
-                await message.channel.send("Trying to start server");
+                await message.channel.send("Trying to start server: " + names[servers.indexOf(server)]);
                 const starter = spawn("openstack", ["server start", `${names[servers.indexOf(server)]}`]);
 		
 		starter.stderr.on('data', async (data) => {
