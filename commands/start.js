@@ -9,16 +9,13 @@ module.exports = {
 
     setInterval(() => {
       const balancer = spawn("ping", ["-c 2", "192.168.131.142"]);
-      const www1 = spawn("ping", ["-c 2", "192.168.131.123"]);
-      const www2 = spawn("ping", ["-c 2", "192.168.132.34"]);
-      const docserv = spawn("ping", ["-c 2", "192.168.130.3"]);
-      const db = spawn("ping", ["-c 2", "192.168.128.166"]);
-      const test = spawn("ping", ["-c 2", "192.168.128.44"]);
-      const backup = spawn("ping", ["-c 2", "192.168.130.205"])
+      const backup = spawn("ping", ["-c 2", "192.168.130.205"]);
+      const server1 = spawn("ping", ["-c 2", "192.168.132.227"]);
+      const server2 =  spawn("ping", ["-c 2", "192.168.131.189"]); 
+      const server3 =  spawn("ping", ["-c 2", "192.168.128.146"]);
 
-
-      const servers = [balancer, www1, www2, docserv, db, test, backup];
-      const names = ["balancer", "www1", "www2", "docServ", "db1", "test", "backup"];
+      const servers = [balancer, backup, server1, server2, server3];
+      const names = ["balancer", "backup", "server1", "server2", "server3"];
 
       // Looping through the servers and checking status
       for (const server of servers) {
